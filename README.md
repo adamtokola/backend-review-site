@@ -1,4 +1,3 @@
-```markdown
 # Backend Review Site
 
 A backend API for a review site, built with Node.js, Express, Sequelize, and PostgreSQL.
