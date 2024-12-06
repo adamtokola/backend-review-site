@@ -1,0 +1,23 @@
+{
+  "development": {
+    "username": "adamtokola",
+    "password": null,
+    "database": "review_site_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "adamtokola",
+    "password": null,
+    "database": "review_site_test_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "production": {
+    "username": "adamtokola",
+    "password": null,
+    "database": "review_site_prod_db",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
