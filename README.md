@@ -24,7 +24,7 @@ A backend API for a review site, built with Node.js, Express, Sequelize, and Pos
 ### Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/adamtokola/backend-review-site
 cd backend-review-site
 ```
 
