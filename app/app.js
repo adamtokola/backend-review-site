@@ -1,35 +1,38 @@
-require('dotenv').config();
-console.log('Environment Variables:', process.env);
 
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-
-const app = express();
-
-app.use(cors());
-app.use(express.json());
-
+const dotenv = require('dotenv');
+const { sequelize } = require('./models');
 const authRoutes = require('./routes/auth');
 const itemRoutes = require('./routes/items');
 const reviewRoutes = require('./routes/reviews');
-const commentRoutes = require('./routes/comments');
 
-console.log(authRoutes);
-console.log(itemRoutes);
-console.log(reviewRoutes);
-console.log(commentRoutes);
+dotenv.config();
 
+const app = express();
+
+// Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+// Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/items', itemRoutes);
 app.use('/api/reviews', reviewRoutes);
-app.use('/api/comments', commentRoutes);
 
-app.get('/', (req, res) => {
-  res.send('Server is running!');
+// Catch-all JSON error handler for undefined routes
+app.use((req, res, next) => {
+  res.status(404).json({ error: 'Route not found' });
 });
 
+// Database Connection and Server Initialization
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-  console.log('JWT_SECRET:', process.env.JWT_SECRET);
+sequelize.sync().then(() => {
+  console.log('Database connected and models synced');
+  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+}).catch((err) => {
+  console.error('Failed to connect to database:', err);
 });
+
+module.exports = app;
