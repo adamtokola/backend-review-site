@@ -3,15 +3,19 @@ const { Item, Review } = require('../models');
 const authenticateToken = require('../middleware/auth');
 const router = express.Router();
 
-// Get all items
 router.get('/', async (req, res) => {
   try {
-    const items = await Item.findAll();
-    res.json(items);
-  } catch (err) {
-    res.status(400).json({ error: err.message });
+      const items = await Item.findAll();
+      if (!items.length) {
+          return res.status(404).json({ error: 'No items found' });
+      }
+      return res.json(items);
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: 'Server error' });
   }
 });
+
 
 // Get item details
 router.get('/:itemId', async (req, res) => {

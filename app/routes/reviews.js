@@ -3,7 +3,6 @@ const { Review } = require('../models');
 const authenticateToken = require('../middleware/auth');
 const router = express.Router();
 
-// Get current user's reviews
 router.get('/me', authenticateToken, async (req, res) => {
   try {
     const reviews = await Review.findAll({ where: { userId: req.user.id } });
@@ -13,7 +12,6 @@ router.get('/me', authenticateToken, async (req, res) => {
   }
 });
 
-// Update a review
 router.put('/users/:userId/reviews/:reviewId', authenticateToken, async (req, res) => {
   try {
     const { text, score } = req.body;
@@ -30,7 +28,7 @@ router.put('/users/:userId/reviews/:reviewId', authenticateToken, async (req, re
   }
 });
 
-// Delete a review
+
 router.delete('/users/:userId/reviews/:reviewId', authenticateToken, async (req, res) => {
   try {
     const review = await Review.findOne({
