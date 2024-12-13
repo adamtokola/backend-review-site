@@ -14,7 +14,6 @@ const itemRoutes = require('./routes/items');
 const reviewRoutes = require('./routes/reviews');
 const commentRoutes = require('./routes/comments');
 
-// Debugging: Ensure all route imports are valid
 console.log(authRoutes);
 console.log(itemRoutes);
 console.log(reviewRoutes);
